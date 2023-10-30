@@ -23,10 +23,10 @@ const taskApi = createApi({
 
     // Add a new task
     addTask: builder.mutation<Task, Partial<Task>>({
-      query: (newTitle) => ({
+      query: (title) => ({
         url: 'tasks',
         method: 'POST',
-        body: { title: newTitle },
+        body: { title },
       }),
     }),
 
