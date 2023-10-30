@@ -3,8 +3,22 @@ import { Box } from "@mui/material"
 import TodoForm from "@/app/components/TodoForm"
 import TodoList from "@/app/components/TodoList"
 import TodoCounter from "@/app/components/TodoCounter"
+import { useGetAllTasksQuery } from "@/lib/redux/api/taskApi"
 
 export default function Todo() {
+  // Use the useGetAllTasksQuery hook to fetch task data
+  const { data: taskArr, error, isLoading } = useGetAllTasksQuery();
+
+  if (isLoading) {
+    // Handle loading state
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    // Handle error state
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <> 
       <Box
@@ -17,9 +31,9 @@ export default function Todo() {
           justifyContent: 'center',
         }}
       >
-        <TodoCounter/>
-        <TodoForm />
-        <TodoList />
+        <TodoCounter taskArr={taskArr}/>
+        <TodoForm taskArr={taskArr} />
+        <TodoList taskArr={taskArr} />
       </Box>
     </>
   )
