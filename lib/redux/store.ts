@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { taskApi } from '@/lib/redux/api/taskApi'
 
-const store = configureStore({
+export const reduxStore = configureStore({
     reducer: {
       [taskApi.reducerPath]: taskApi.reducer,
     },
@@ -10,4 +10,4 @@ const store = configureStore({
     devTools: true,
 })
 
-export default store
+export type ReduxStore = typeof reduxStore
