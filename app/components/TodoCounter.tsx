@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material"
 
-export default function TodoCounter({ todoArr}) {
+export default function TodoCounter() {
 
     const todoCompletedCount = todoArr.filter(todo => todo.completed == true).length
     const todoTotalCount = todoArr.length

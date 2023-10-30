@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box } from '@mui/material';
 
-export default function TodoList({setTodoArr, todoArr}) {
+export default function TodoList() {
 
     const deleteTodo = (id) => {
         const newTodoArr = todoArr.filter(todo => {return todo.id != id})

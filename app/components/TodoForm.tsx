@@ -1,7 +1,7 @@
 import { TextField, Button, Box } from "@mui/material";
 import { useForm } from "react-hook-form"
 
-export default function TodoForm({setTodoArr, todoArr}) {
+export default function TodoForm() {
 
     const {
         register,
