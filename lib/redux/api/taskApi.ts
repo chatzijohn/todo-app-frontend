@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Task } from '@/lib/models/taskModel'
 
-export const taskApi = createApi({
+const taskApi = createApi({
   // baseUrl: 'http://192.168.1.135:5050/api'
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5050/api' }),
   endpoints: (builder) => ({
