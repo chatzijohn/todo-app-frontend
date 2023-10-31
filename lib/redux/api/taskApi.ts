@@ -32,7 +32,7 @@ export const taskApi = createApi({
     }),
 
     // Delete a task
-    deleteTask: builder.mutation<void, Partial<Task>>({
+    deleteTask: builder.mutation<{ success: boolean, id: number }, number>({
       query: (id) => ({
         url: `tasks/${id}`,
         method: 'DELETE',

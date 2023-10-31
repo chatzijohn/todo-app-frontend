@@ -17,8 +17,10 @@ export default function TodoForm() {
 
     return (
         <Box
-            direction="column"
-            alignItems="center"
+            sx={{
+                direction: "column",
+                alignItems: "center"
+            }}
         >
 
             <form 
