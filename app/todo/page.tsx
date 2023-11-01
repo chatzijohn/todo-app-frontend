@@ -1,13 +1,13 @@
 "use client"
 import { Box } from "@mui/material"
-// import TodoForm from "@/app/components/TodoForm"
+import TodoForm from "@/app/components/TodoForm"
 import TodoList from "@/app/components/TodoList"
 // import TodoCounter from "@/app/components/TodoCounter"
 import { useGetAllTasksQuery } from "@/lib/redux/api/taskApi"
 
 export default function Todo() {
   // Use the useGetAllTasksQuery hook to fetch task data
-  const { data: taskData, error, isLoading } = useGetAllTasksQuery();
+  const { data: taskData, error, isLoading } = useGetAllTasksQuery()
 
   if (isLoading) {
     // Handle loading state
@@ -31,8 +31,8 @@ export default function Todo() {
           justifyContent: 'center',
         }}
       >
-        {/* <TodoCounter />
-        <TodoForm /> */}
+        {/* <TodoCounter /> */}
+        <TodoForm />
         <TodoList taskArr={taskData.tasks} />
       </Box>
     </>

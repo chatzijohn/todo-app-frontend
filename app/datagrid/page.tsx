@@ -3,74 +3,61 @@ import React from 'react'
 import { Box } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid';
 import TitleHeading from '@/app/components/TitleHeading'
-
+import { useGetAllTasksQuery } from "@/lib/redux/api/taskApi"
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
     {
-      field: 'firstName',
-      headerName: 'First name',
-      width: 150,
+      field: 'title',
+      headerName: 'Task Title',
+      width: 250,
       editable: true,
     },
     {
-      field: 'lastName',
-      headerName: 'Last name',
-      width: 150,
-      editable: true,
+      field: 'createdAt',
+      headerName: 'Created At',
+      width: 250,
+      editable: false,
     },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
-      editable: true,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    },
-]
-
-const rows = [
-    { id: 1, lastName: 'Kyrikos', firstName: 'ΦΘΜ', age: 36 },
-    { id: 2, lastName: 'Papakostantinou', firstName: 'Konstantinos', age: 28 },
-    { id: 3, lastName: 'Demetriou', firstName: 'Elias', age: 26 },
-    { id: 4, lastName: 'Wagdy', firstName: 'Nady', age: 25 },
-    { id: 5, lastName: 'Chatzigiannis', firstName: 'Panagiotis', age: 24 },
 ]
 
 export default function DataGridPage() {
+  // Use the useGetAllTasksQuery hook to fetch task data
+  const { data: taskData, error, isLoading } = useGetAllTasksQuery()
 
-    return(
-        <>
-            <TitleHeading title="Technor Traitors" height="50vh" subTitle={''}/>
-            <Box
-                sx = {{
-                  height: "50vh",
-                  flexGrow: 1,
-                }}
-            >
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                          paginationModel: {
-                            pageSize: 5,
-                          },
+  if (isLoading) {
+    // Handle loading state
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    // Handle error state
+    return <div>Error: {error.message}</div>;
+  }
+
+  return(
+      <>
+          <TitleHeading title="Todo Tasks" height="50vh" subTitle={''}/>
+          <Box
+              sx = {{
+                height: "50vh",
+                flexGrow: 1,
+              }}
+          >
+              <DataGrid
+                  rows={taskData.tasks}
+                  columns={columns}
+                  initialState={{
+                      pagination: {
+                        paginationModel: {
+                          pageSize: 5,
                         },
-                      }}
-                      pageSizeOptions={[5]}
-                      checkboxSelection
-                      disableRowSelectionOnClick
-                />
-            </Box>
-        </>
-    )
+                      },
+                    }}
+                    pageSizeOptions={[5]}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+              />
+          </Box>
+      </>
+  )
 }
